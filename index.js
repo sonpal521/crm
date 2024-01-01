@@ -20,11 +20,11 @@ authRoutes(app);
 userRoutes(app);
 ticketRoutes(app);
 
-mongoose.connect(mongoDbUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-const db = mongoose.connection;
+// mongoose.connect(mongoDbUri, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// });
+// const db = mongoose.connection;
 
 app.use(bodyParser.json());
 
@@ -37,23 +37,23 @@ db.once("open", () => {
 })
 
 
-app.listen(PORT, () => {
-    console.log("server is listening to the port: ", PORT);
-})
-
-
-// app.listen(PORT, ()=>{
+// app.listen(PORT, () => {
 //     console.log("server is listening to the port: ", PORT);
-//     /* connect to mongo db */
-//     mongoose.connect(dbUri).then(
-//         () => {
-//             /** ready to use. The `mongoose.connect()` promise resolves to mongoose instance. */
-//             console.log("connected to mongo db successfully");
-//         },
-//         err => {
-//             /** handle initial connection error */
-//             console.log("Error occurred: ", err);
-//         }
-//     );
 // })
+
+
+app.listen(PORT, ()=>{
+    console.log("server is listening to the port: ", PORT);
+    /* connect to mongo db */
+    mongoose.connect(mongoDbUri).then(
+        () => {
+            /** ready to use. The `mongoose.connect()` promise resolves to mongoose instance. */
+            console.log("connected to mongo db successfully");
+        },
+        err => {
+            /** handle initial connection error */
+            console.log("Error occurred: ", err);
+        }
+    );
+})
 
